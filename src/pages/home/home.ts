@@ -43,24 +43,24 @@ export class HomePage {
 
   };
 
-  public sharingWhatsapp() {
+  // public sharingWhatsapp() {
 
-    this._socialSharing.shareViaWhatsApp(this._message, null, this._url).then(() => {
-      alert('Compartilhamento realizado!');
-    }).catch(err => {
-      alert('Compartilhamento não foi realizado!');
-    });
+  //   this._socialSharing.shareViaWhatsApp(this._message, null, this._url).then(() => {
+  //     alert('Compartilhamento realizado!');
+  //   }).catch(err => {
+  //     alert('Compartilhamento não foi realizado!');
+  //   });
 
-  };
+  // };
 
 
-  public sharing() {
+  // public sharing() {
 
-    this._socialSharing.share("Genral Share Sheet", null/*Subject*/, null/*File*/, "http://pointdeveloper.com").then(() => {
-      alert('Compartilhamento realizado!');
-    }).catch(err => {
-      alert('Compartilhamento não foi realizado!');
-    });
+  //   this._socialSharing.share("Genral Share Sheet", null/*Subject*/, null/*File*/, "http://pointdeveloper.com").then(() => {
+  //     alert('Compartilhamento realizado!');
+  //   }).catch(err => {
+  //     alert('Compartilhamento não foi realizado!');
+  //   });
 
-  };
+  // };
 }
