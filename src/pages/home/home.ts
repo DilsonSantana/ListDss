@@ -36,9 +36,9 @@ export class HomePage {
   public sharingEmail() {
 
     this._socialSharing.shareViaEmail(this._body, this._subject, this._emails).then(() => {
-      console.log('Compartilhamento realizado!');
-    }).catch(err => {
-      console.log('Compartilhamento não foi realizado!', err);
+      alert('Compartilhamento realizado!');
+    }).catch(() => {
+      alert('Compartilhamento não foi realizado!');
     });
 
   };
@@ -46,9 +46,9 @@ export class HomePage {
   public sharingWhatsapp() {
 
     this._socialSharing.shareViaWhatsApp(this._message, null, this._url).then(() => {
-      console.log('Compartilhamento realizado!');
+      alert('Compartilhamento realizado!');
     }).catch(err => {
-      console.log('Compartilhamento não foi realizado!', err);
+      alert('Compartilhamento não foi realizado!');
     });
 
   };
@@ -57,9 +57,9 @@ export class HomePage {
   public sharing() {
 
     this._socialSharing.share("Genral Share Sheet", null/*Subject*/, null/*File*/, "http://pointdeveloper.com").then(() => {
-      console.log('Compartilhamento realizado!');
+      alert('Compartilhamento realizado!');
     }).catch(err => {
-      console.log('Compartilhamento não foi realizado!', err);
+      alert('Compartilhamento não foi realizado!');
     });
 
   };
