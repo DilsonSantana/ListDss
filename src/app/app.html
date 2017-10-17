@@ -1,15 +1,32 @@
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+  <ion-header class="menu">
+    <ion-toolbar color="toolbar" class="menu">
+      
+      <ion-title>
+        <img class="menu"> 
+        <label style="position:absolute;padding-top:6px;margin-left:5px;">Olá, Dilson</label>
+        <span style="position:absolute;padding-top: 26px;font-size:12px;margin-left:5px;">contato.dilson@gmail.com</span>
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-list>
+    <ion-list no-lines>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+      <span class="icon-item-menu"><ion-icon [name]="p.icon" item-start></ion-icon></span>
+      <span class="item-menu">{{p.title}}</span>
       </button>
+    </ion-list>
+    <hr>
+    <ion-list no-lines>
+        <button menuClose ion-item (click)="openPage(pages[1])">
+          <span class="icon-item-menu"><ion-icon name="search" item-start></ion-icon></span>
+          <span class="item-menu">Buscar</span>
+        </button>
+         <button menuClose ion-item (click)="openPage(pages[2])">
+          <span class="icon-item-menu"><ion-icon name="pricetags" item-start></ion-icon></span>
+          <span class="item-menu">Vender grátis</span>
+        </button>
     </ion-list>
   </ion-content>
 

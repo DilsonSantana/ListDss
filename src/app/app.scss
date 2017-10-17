@@ -14,3 +14,40 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-toolbar.menu{
+    height: 100px;
+}
+
+ion-header.menu{
+    height: 100px;
+}
+
+img.menu{
+    background: url("../assets/icon/user.jpg") center;
+    background-size: 45px;
+    height: 45px; 
+    width: 45px;
+    border-radius: 50%;
+   
+}
+.icon-item-menu{
+    margin-left: 15px;
+}
+
+.item-menu{
+    margin-left: 10px;
+}
+
+ion-icon{
+    font-size: 30px;
+}
+
+ion-list{
+    button{
+        height: 50px;
+        .input-wrapper{
+            height: 50px;
+        }
+    }
+}
