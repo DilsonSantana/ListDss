@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import 'rxjs/add/operator/toPromise';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
@@ -7,60 +8,35 @@ import { SocialSharing } from '@ionic-native/social-sharing';
   templateUrl: 'home.html'
 })
 
-
-
 export class HomePage {
-
-  private _body = 'Realizando teste de compartilhamento';
-  private _subject = 'Livro compartilhado por Dilson';
-  private _emails = ['dilson.santos@tripletech.com.br'];
-
-  private _message = "Realizando teste de compartilhamento";
-  private _image = '../assets/icon/user.jpg';
-  private _url = "http://www.uol.com.br";
 
   constructor(public navCtrl: NavController, private _socialSharing: SocialSharing) {
 
   }
 
+  compilemsg(index): string {
+    
+    return "compartilhado por Dilson Santana";
+  }
 
-  public canSharingEmail() {
+  whatsappShare(index) {
+    var msg = this.compilemsg(index);
+    this._socialSharing.shareViaWhatsApp(msg, "www/assets/icon/user.jpg", null);
+  }
 
-    this._socialSharing.canShareViaEmail().then(() => {
-      this.sharingEmail();
-    }).catch(() => {
-      alert("Email nao disponivel");
-    });
-  };
+  regularShare(index) {
+    var msg = this.compilemsg(index);
+    this._socialSharing.share(msg, null, null, null);
+  }
 
-  public sharingEmail() {
+  twitterShare(index) {
+    var msg = this.compilemsg(index);
+    this._socialSharing.shareViaTwitter(msg, null, null);
+  }
 
-    this._socialSharing.shareViaEmail(this._body, this._subject, this._emails).then(() => {
-      alert('Compartilhamento realizado!');
-    }).catch(() => {
-      alert('Compartilhamento não foi realizado!');
-    });
+  facebookShare(index) {
+    var msg = this.compilemsg(index);
+    this._socialSharing.shareViaFacebook(msg, "www/assets/icon/user.jpg", null);
+  }
 
-  };
-
-  // public sharingWhatsapp() {
-
-  //   this._socialSharing.shareViaWhatsApp(this._message, null, this._url).then(() => {
-  //     alert('Compartilhamento realizado!');
-  //   }).catch(err => {
-  //     alert('Compartilhamento não foi realizado!');
-  //   });
-
-  // };
-
-
-  // public sharing() {
-
-  //   this._socialSharing.share("Genral Share Sheet", null/*Subject*/, null/*File*/, "http://pointdeveloper.com").then(() => {
-  //     alert('Compartilhamento realizado!');
-  //   }).catch(err => {
-  //     alert('Compartilhamento não foi realizado!');
-  //   });
-
-  // };
 }

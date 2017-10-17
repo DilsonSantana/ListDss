@@ -6,7 +6,7 @@
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
-
+<!-- 
 <ion-content padding>
   <h3>Ionic Menu Starter</h3>
 
@@ -14,9 +14,51 @@
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
   </p>
 
-  <button ion-button primary (click)="canSharingEmail()">Compartilhar Email</button>
-  <button ion-button secondary (click)="sharingWhatsapp()">Compartilhar Whatsapp</button>
-  <button ion-button danger (click)="sharing()">Compartilhar</button>
+  <button ion-button color="primary" (click)="sharing('whatsapp','message', null, './assets/icon/user.jpg', null)">Compartilhar WhatsApp1</button>
+  <button ion-button color="primary" (click)="sharing('whatsapp','message', null, '../assets/icon/user.jpg', null)">Compartilhar WhatsApp2</button>
+  <button ion-button color="primary" (click)="sharing('whatsapp','message', null, './../assets/icon/user.jpg', null)">Compartilhar WhatsApp3</button>
+  <button ion-button color="primary" (click)="sharing('whatsapp','message', null, '../../assets/icon/user.jpg', null)">Compartilhar WhatsApp4</button>
+  <button ion-button color="primary" (click)="sharing('whatsapp','message', null, '../../assets/icon/user.jpg', null)">Compartilhar WhatsApp4</button>
+  <button ion-button color="secondary" (click)="sharing('email','message', 'subject', null, 'http://www.uol.com.br')">Compartilhar Email</button>
+  <button ion-button color="toolbar" (click)="sharing('facebook','message', 'subject', '../assets/icon/user.jpg', 'http://www.uol.com.br')">Compartilhar Facebook</button>
+  <button ion-button color="danger" (click)="sharing('instagram','message', null, null, null)">Compartilhar Instagram</button>
   
-  
+</ion-content> -->
+
+<ion-content padding>
+  <!-- Cards containing quotes -->
+  <ion-card>
+    <!-- Quote aurthor -->
+    <ion-card-header>
+      
+    </ion-card-header>
+    <!-- Quote Title -->
+    <ion-card-content></ion-card-content>
+    <!-- Sharing Icons -->
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-only (click)="regularShare(1)" color="primary" clear>
+        <ion-icon class="share-icon" name="share"></ion-icon>
+      </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="whatsappShare(2)" color="primary" clear>
+        <ion-icon class="share-icon" name="logo-whatsapp"></ion-icon>
+      </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="facebookShare(3)" color="primary" clear>
+        <ion-icon  class="share-icon" name="logo-facebook"></ion-icon>
+      </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="twitterShare(4)" color="primary" clear>
+        <ion-icon class="share-icon" name="logo-twitter"></ion-icon>
+      </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
 </ion-content>
