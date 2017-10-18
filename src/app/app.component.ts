@@ -24,7 +24,7 @@ export class MyApp {
     this.pages = [
       { title: 'List', component: ListPage, icon:'star' },
       { title: 'Home', component: HomePage, icon:'home' },
-      { title: 'Categorias', component: CategoriasPage, icon:'category' },
+      { title: 'Categorias', component: CategoriasPage, icon:'folder-open' },
       { title: 'List', component: ListPage, icon:'heart-outline' },
       { title: 'List', component: ListPage, icon:'folder' },
       { title: 'List', component: ListPage, icon:'person' }

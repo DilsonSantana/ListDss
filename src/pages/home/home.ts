@@ -10,33 +10,70 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 
 export class HomePage {
 
+  mensagens = [
+    {
+      titulo: "Violência, direito e trabalho na organização social",
+      autor: "Borges, Wilson Hilario",
+      data: "1997.",
+      editor: "Felipe Velozo",
+      assunto: ["violência", "trabalho", "direito", "estrutura social", "movimento social"]
+    },
+    {
+      titulo: "Violência, direito e trabalho na organização social",
+      autor: "Borges, Wilson Hilario",
+      data: "1997.",
+      editor: "Dilson",
+      assunto: ["violência", "trabalho", "direito", "estrutura social", "movimento social"]
+    },
+    {
+      titulo: "Violência, direito e trabalho na organização social",
+      autor: "Borges, Wilson Hilario",
+      data: "1997.",
+      editor: "Bahia doidao",
+      assunto: ["violência", "trabalho", "direito", "estrutura social", "movimento social"]
+    },
+    {
+      titulo: "Violência, direito e trabalho na organização social",
+      autor: "Borges, Wilson Hilario",
+      data: "1997.",
+      editor: "Gaby Corinthiana",
+      assunto: ["violência", "trabalho", "direito", "estrutura social", "movimento social"]
+    },
+    {
+      titulo: "Violência, direito e trabalho na organização social",
+      autor: "Borges, Wilson Hilario",
+      data: "1997.",
+      editor: "Germinal",
+      assunto: ["violência", "trabalho", "direito", "estrutura social", "movimento social"]
+    },
+    {
+      titulo: "Violência, direito e trabalho na organização social",
+      autor: "Borges, Wilson Hilario",
+      data: "1997.",
+      editor: "Germinal",
+      assunto: ["violência", "trabalho", "direito", "estrutura social", "movimento social"]
+    }
+   ];
+
   constructor(public navCtrl: NavController, private _socialSharing: SocialSharing) {
 
   }
 
-  compilemsg(index): string {
-    
-    return "compartilhado por Dilson Santana";
+  whatsappShare(msg) {
+    this._socialSharing.shareViaWhatsApp(msg, null);
   }
 
-  whatsappShare(index) {
-    var msg = this.compilemsg(index);
-    this._socialSharing.shareViaWhatsApp(msg, "www/assets/icon/user.jpg", null);
+  regularShare(msg) {
+    var mensagem = 'Titulo: ' + msg.titulo + "\n" + 'Autor: ' + msg.autor + "\n" + 'Data: ' + msg.data + "\n" + 'Editor: ' + msg.editor + "\n" + 'Assunto: ' + msg.assunto;
+    this._socialSharing.share(mensagem, "Arquivo compartilhado", "www/assets/icon/favicon.ico", "http://www.uol.com.br");
   }
 
-  regularShare(index) {
-    var msg = this.compilemsg(index);
-    this._socialSharing.share(msg, null, null, null);
-  }
-
-  twitterShare(index) {
-    var msg = this.compilemsg(index);
+  twitterShare(msg) {
     this._socialSharing.shareViaTwitter(msg, null, null);
   }
 
-  facebookShare(index) {
-    var msg = this.compilemsg(index);
-    this._socialSharing.shareViaFacebook(msg, "www/assets/icon/user.jpg", null);
+  facebookShare(msg) {
+    this._socialSharing.shareViaFacebookWithPasteMessageHint(msg, "www/assets/icon/user.jpg", null, null);
   }
 
 }
