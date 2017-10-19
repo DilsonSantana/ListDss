@@ -10,7 +10,8 @@
 
         </div>
 
-        <div *ngIf="checkList()" style="margin:auto">
+        <!-- <div *ngIf="checkList()" style="margin:auto"> -->
+            <div style="margin:auto">
 
             <div class="csf-modal-body">
                 <div class="csf-class-name">
@@ -24,10 +25,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let d of detalhesFaltas">
+                        <!-- <tr *ngFor="let d of detalhesFaltas">
                             <td>{{ d.data | date: 'dd/MM/yyyy' }}</td>
                             <td>{{d.totalFaltas}}</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
                 <!--<div class="csf-class-name">
@@ -41,7 +42,8 @@
 
         </div>
 
-        <div *ngIf="!checkList()" style="margin:auto">
+        <!-- <div *ngIf="!checkList()" style="margin:auto"> -->
+            <div style="margin:auto">
 
             <div class="csf-modal-body">
                 <div class="csf-class-name">

@@ -10,6 +10,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { FaltasPage } from '../pages/faltas/faltas';
+import { ComponentsModule } from '../components/components.module';
+import { ModalService } from 'modal-service';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { FaltasPage } from '../pages/faltas/faltas';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -33,7 +36,8 @@ import { FaltasPage } from '../pages/faltas/faltas';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SocialSharing
+    SocialSharing,
+    ModalService
   ]
 })
 export class AppModule {}

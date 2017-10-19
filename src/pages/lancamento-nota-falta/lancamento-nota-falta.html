@@ -1,0 +1,76 @@
+<ion-header>
+    
+      <ion-navbar>
+        <ion-title style="text-transform:capitalize">Lancamentos {{ type }}</ion-title>
+  
+        <ion-buttons end>
+          <button ion-button icon-only (click)="dismiss()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-buttons>
+  
+  
+      </ion-navbar>
+    
+    </ion-header>
+  
+  <ion-content>
+    <!-- Generated template for the ComponentsCustomModalComponent component -->
+    <div class="csf-modal-container">
+      <div class="csf-modal-content">
+  
+        <div class="csf-modal-header">
+  
+        </div>
+  
+        <div *ngIf="checkList()" style="margin:auto;width:100%;">
+  
+          <div class="csf-modal-body">
+            <div class="csf-class-name">
+              Matéria: {{ materia }}
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Lançamento</td>
+                  <td>Faltas</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let d of detalhes">
+                  <td>{{ getDateFormated(d.data, false) }}</td>
+                  <td>{{d.totalFaltas}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!--<div class="csf-class-name">
+                    {{ totalFaltas }}
+                </div>
+  
+                <div class="csf-class-date">
+                    Lancamento: {{ data | date: 'dd/MM/yyyy HH:mm' }}
+                </div>-->
+          </div>
+  
+        </div>
+  
+        <div *ngIf="!checkList()" style="margin:auto">
+  
+          <div class="csf-modal-body">
+            <div class="csf-class-name">
+              Matéria: {{ materia }}
+            </div>
+  
+            <div class="csf-class-name">
+              Nota: {{ nota }}
+            </div>
+  
+            <div class="csf-class-date">
+              Lançamento: {{ getDateFormated(lancamento, true) }}
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </ion-content>
