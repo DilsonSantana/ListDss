@@ -1,0 +1,556 @@
+<!--
+  Generated template for the Faltas page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start *ngIf="isModal" (click)="dismiss()">
+      <button ion-button icon-only color="royal">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Faltas</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="opcao">
+      <ion-segment-button value="graduacao" [class.hidden]="!isGraduation()">
+        Graduação
+      </ion-segment-button>
+      <ion-segment-button value="posgraduacao" [class.hidden]="isGraduation()">
+        Pós-Graduação
+      </ion-segment-button>
+      <ion-segment-button value="praticas" [class.hidden]="!isGraduation()">
+        Práticas
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+<!--<ion-col width-34 class="boletim-faltas">
+            <a class="boletim-faltas">
+              Resumo
+            </a>
+          </ion-col>-->
+
+<ion-content>
+  <!-- <components-custom-modal materianame="Matéria: Teoria geral do direito" lancamento="Lancamento: 30/05/2017 08:52:00 PM"></components-custom-modal> -->
+
+  <div [ngSwitch]="opcao">
+    <ion-list *ngSwitchCase="'graduacao'">
+
+      <div style="text-align: center">
+        <ion-grid class="boletim-grid" *ngFor="let f of graduacao">
+          <ion-row class="row-boletim">
+            <ion-col width-100 class="boletim-nome-curso">{{f.nome}}</ion-col>
+
+          </ion-row>
+          <ion-row>
+            <ion-col width-17 class="boletim-col" *ngIf="!hasBimestre(f, 1)">
+              <div class="boletim-bimestre-nome">
+                1º BIM
+              </div>
+              <div class="boletim-bimestre-nota">
+                1
+              </div>
+            </ion-col>
+
+            <ion-col width-17 class="boletim-col" *ngIf="!hasBimestre(f, 2)">
+              <div class="boletim-bimestre-nome">
+                2º BIM
+              </div>
+              <div class="boletim-bimestre-nota">
+                2
+              </div>
+            </ion-col>
+
+            <ion-col width-17 class="boletim-col" *ngIf="!hasBimestre(f, 3)">
+              <div class="boletim-bimestre-nome">
+                3º BIM
+              </div>
+              <div class="boletim-bimestre-nota">
+                3
+              </div>
+            </ion-col>
+
+            <ion-col width-17 class="boletim-col" *ngIf="!hasBimestre(f, 4)">
+              <div class="boletim-bimestre-nome">
+                4º BIM
+              </div>
+              <div class="boletim-bimestre-nota">
+                3
+              </div>
+            </ion-col>
+
+
+            <ion-col width-17 class="boletim-col">
+              <div class="boletim-bimestre-nome">
+                Total
+              </div>
+              <div class="boletim-bimestre-nota">
+                9
+              </div>
+            </ion-col>
+            <ion-col width-17 class="boletim-col">
+              <div class="boletim-bimestre-nome">
+                Limite
+              </div>
+              <div class="boletim-bimestre-nota">
+                35
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'posgraduacao'">
+
+      <div style="text-align: center">
+        <ion-grid class="boletim-grid" *ngFor="let f of posgraduacao">
+          <ion-row class="row-boletim">
+            <ion-col width-100 class="boletim-nome-curso">{{f.nome}}</ion-col>
+
+          </ion-row>
+          <ion-row>
+            <ion-col width-17 class="boletim-col" *ngFor="let bimestre of f.bimestres">
+              <div class="boletim-bimestre-nome">
+                {{ bimestre.name }}
+              </div>
+              <div class="boletim-bimestre-nota" (click)="showModalFaltas(f.nome, bimestre.detalhesFaltas)">
+                {{ bimestre.totalFaltas }}
+              </div>
+            </ion-col>
+
+            <ion-col width-17 class="boletim-col" *ngIf="!hasBimestre(f, 1)">
+              <div class="boletim-bimestre-nome">
+                1º BIM
+              </div>
+              <div class="boletim-bimestre-nota">
+
+              </div>
+            </ion-col>
+
+            <ion-col width-17 class="boletim-col" *ngIf="!hasBimestre(f, 2)">
+              <div class="boletim-bimestre-nome">
+                2º BIM
+              </div>
+              <div class="boletim-bimestre-nota">
+
+              </div>
+            </ion-col>
+
+            <ion-col width-17 class="boletim-col" *ngIf="!hasBimestre(f, 3)">
+              <div class="boletim-bimestre-nome">
+                3º BIM
+              </div>
+              <div class="boletim-bimestre-nota">
+
+              </div>
+            </ion-col>
+
+            <ion-col width-17 class="boletim-col" *ngIf="!hasBimestre(f, 4)">
+              <div class="boletim-bimestre-nome">
+                4º BIM
+              </div>
+              <div class="boletim-bimestre-nota">
+
+              </div>
+            </ion-col>
+
+            <ion-col width-17 class="boletim-col">
+              <div class="boletim-bimestre-nome">
+                Total
+              </div>
+              <div class="boletim-bimestre-nota">
+                {{ f.totalFaltas }}
+              </div>
+            </ion-col>
+            <ion-col width-17 class="boletim-col">
+              <div class="boletim-bimestre-nome">
+                Limite
+              </div>
+              <div class="boletim-bimestre-nota">
+                {{f.limiteFaltas}}
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'praticas'">
+
+      <div style="text-align: center">
+        <ion-grid class="boletim-grid" *ngFor="let f of praticas">
+          <ion-row class="row-boletim">
+            <ion-col width-100 class="boletim-nome-curso">{{f.nome}}</ion-col>
+
+          </ion-row>
+          <ion-row>
+            <ion-col width-50 class="boletim-col">
+              <div class="boletim-bimestre-nome">
+                Total
+              </div>
+              <div class="boletim-bimestre-nota" (click)="showFaltasPraticas(f)">
+                {{ f.totalFaltas }}
+              </div>
+            </ion-col>
+            <ion-col width-50 class="boletim-col">
+              <div class="boletim-bimestre-nome">
+                Limite
+              </div>
+              <div class="boletim-bimestre-nota">
+                {{ f.limiteFaltas }}
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-list>
+
+
+  </div>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="row-boletim">
+        <ion-col width-100 class="boletim-nome-curso">Direito Administrativo</ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <div style="text-align: center">
+          <ion-grid class="boletim-grid">
+            <ion-row>
+              <ion-col col-5>
+                <ion-row col-12>
+                  <ion-col col-8 class="col-faltas">1º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">0</ion-col>
+
+                  <ion-col col-8 class="col-faltas">2º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">1</ion-col>
+
+                  <ion-col col-8 class="col-faltas">3º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">2</ion-col>
+
+                  <ion-col col-8 class="col-faltas">4º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">0</ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col col-7>
+                <ion-row col-12 style="height:133.2px;">
+                  <ion-col col-8 class="col-faltas">Total Faltas</ion-col>
+                  <ion-col col-4 class="col-faltas">3</ion-col>
+
+                  <ion-col col-8 class="col-faltas">Limite</ion-col>
+                  <ion-col col-4 class="col-faltas">27</ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="row-boletim">
+        <ion-col width-100 class="boletim-nome-curso">Direito Administrativo</ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <div style="text-align: center">
+          <ion-grid class="boletim-grid">
+            <ion-row>
+              <ion-col col-5>
+                <ion-row col-12>
+                  <ion-col col-8 class="col-faltas">1º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">0</ion-col>
+
+                  <ion-col col-8 class="col-faltas">2º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">1</ion-col>
+
+                  <ion-col col-8 class="col-faltas">3º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">2</ion-col>
+
+                  <ion-col col-8 class="col-faltas">4º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">0</ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col col-7>
+                <ion-row col-12 style="height:133.2px;">
+                  <ion-col col-8 class="col-faltas">Total Faltas</ion-col>
+                  <ion-col col-4 class="col-faltas">3</ion-col>
+
+                  <ion-col col-8 class="col-faltas">Limite</ion-col>
+                  <ion-col col-4 class="col-faltas">27</ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="row-boletim">
+        <ion-col width-100 class="boletim-nome-curso">Direito Administrativo</ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <div style="text-align: center">
+          <ion-grid class="boletim-grid">
+            <ion-row>
+              <ion-col col-5>
+                <ion-row col-12>
+                  <ion-col col-8 class="col-faltas">1º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">0</ion-col>
+
+                  <ion-col col-8 class="col-faltas">2º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">1</ion-col>
+
+                  <ion-col col-8 class="col-faltas">3º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">2</ion-col>
+
+                  <ion-col col-8 class="col-faltas">4º BIM</ion-col>
+                  <ion-col col-4 class="col-faltas-result">0</ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col col-7>
+                <ion-row col-12 style="height:133.2px;">
+                  <ion-col col-8 class="col-faltas">Total Faltas</ion-col>
+                  <ion-col col-4 class="col-faltas">3</ion-col>
+
+                  <ion-col col-8 class="col-faltas">Limite</ion-col>
+                  <ion-col col-4 class="col-faltas">27</ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="row-boletim">
+        <ion-col width-100 class="boletim-nome-curso">Direito Civil III</ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <div style="text-align: center">
+          <ion-grid class="boletim-grid">
+            <ion-row>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">1º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">6</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">2º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">1</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">3º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">2</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">4º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">0</ion-col>
+              </ion-col>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Total Faltas</ion-col>
+                <ion-col col-4 class="col-faltas-result">9</ion-col>
+              </ion-row>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Limite</ion-col>
+                <ion-col col-4 class="col-faltas-result">27</ion-col>
+              </ion-row>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="row-boletim">
+        <ion-col width-100 class="boletim-nome-curso">Direito Civil III</ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <div style="text-align: center">
+          <ion-grid class="boletim-grid">
+            <ion-row>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">1º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">6</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">2º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">1</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">3º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">2</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">4º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">0</ion-col>
+              </ion-col>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Total Faltas</ion-col>
+                <ion-col col-4 class="col-faltas-result">9</ion-col>
+              </ion-row>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Limite</ion-col>
+                <ion-col col-4 class="col-faltas-result">27</ion-col>
+              </ion-row>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="row-boletim">
+        <ion-col width-100 class="boletim-nome-curso">Direito Civil III</ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <div style="text-align: center">
+          <ion-grid class="boletim-grid">
+            <ion-row>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">1º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">6</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">2º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">1</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">3º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">2</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">4º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">0</ion-col>
+              </ion-col>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Total Faltas</ion-col>
+                <ion-col col-4 class="col-faltas-result">9</ion-col>
+              </ion-row>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Limite</ion-col>
+                <ion-col col-4 class="col-faltas-result">27</ion-col>
+              </ion-row>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="row-boletim">
+        <ion-col width-100 class="boletim-nome-curso">Direito Civil III</ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <div style="text-align: center">
+          <ion-grid class="boletim-grid">
+            <ion-row>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">1º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">6</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">2º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">1</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">3º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">2</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">4º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">0</ion-col>
+              </ion-col>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Total Faltas</ion-col>
+                <ion-col col-4 class="col-faltas-result">9</ion-col>
+              </ion-row>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Limite</ion-col>
+                <ion-col col-4 class="col-faltas-result">27</ion-col>
+              </ion-row>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="row-boletim">
+        <ion-col width-100 class="boletim-nome-curso">Direito Civil III</ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <div style="text-align: center">
+          <ion-grid class="boletim-grid">
+            <ion-row>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">1º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">6</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">2º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">1</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">3º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">2</ion-col>
+              </ion-col>
+              <ion-col col-3 style="background-color:#DFF2FF">
+                <ion-col col-8 class="col-faltas">4º BIM</ion-col>
+                <ion-col col-4 class="col-faltas-result">0</ion-col>
+              </ion-col>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Total Faltas</ion-col>
+                <ion-col col-4 class="col-faltas-result">9</ion-col>
+              </ion-row>
+              <ion-row col-6>
+                <ion-col col-8 class="col-faltas">Limite</ion-col>
+                <ion-col col-4 class="col-faltas-result">27</ion-col>
+              </ion-row>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

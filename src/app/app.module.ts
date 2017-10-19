@@ -9,12 +9,14 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { FaltasPage } from '../pages/faltas/faltas';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    FaltasPage
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    FaltasPage
   ],
   providers: [
     StatusBar,
